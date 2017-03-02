@@ -1,0 +1,39 @@
+name: FMTabList
+main: com.firesoftitan.play.fmtablist.FMTabList
+dev-url: http://www.firesoftitan.com
+version: 1.0.0
+authors: [freethemice]
+depend: [Slimefun]
+softdepend: [CS-CoreLib, SlimefunLuckyBlocks]
+commands:
+   lbt:
+      description: Used to do lbt
+      usage: /<command>
+   pm:
+      description: Used to do pm
+      usage: /<command>
+   emailout:
+      description: Used to do emailout
+      usage: /<command>
+   fmsf:
+      description: Used to do emailout
+      usage: /<command>
+   setvote:
+      description: Used to do setvote
+      usage: /<command>
+permissions:
+  FMTabList.lbt:
+    description: Gives access to lbt commands
+    default: op
+  FMTabList.pm:
+    description: Gives access to pm commands
+    default: op
+  FMTabList.email:
+    description: Gives access to emailout commands
+    default: op
+  FMTabList.fmsf:
+    description: Gives access to fmsf commands
+    default: op
+  FMTabList.setvote:
+    description: Gives access to setvote commands
+    default: op
