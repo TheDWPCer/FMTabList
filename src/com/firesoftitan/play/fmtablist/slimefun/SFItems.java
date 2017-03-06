@@ -1,8 +1,11 @@
 package com.firesoftitan.play.fmtablist.slimefun;
 
+import com.firesoftitan.play.fmtablist.FMTabList;
 import me.mrCookieSlime.CSCoreLibPlugin.general.Inventory.Item.CustomItem;
+import me.mrCookieSlime.CSCoreLibPlugin.general.World.CustomSkull;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.material.MaterialData;
 
 /**
  * Created by Daniel on 12/28/2016.
@@ -52,5 +55,19 @@ public class SFItems {
     public static ItemStack TitanLeggings = new CustomItem(Material.DIAMOND_LEGGINGS, "&4&lTitan Leggings", new String[] { "PROTECTION_ENVIRONMENTAL-23", "PROTECTION_PROJECTILE-23", "PROTECTION_EXPLOSIONS-23", "THORNS-23", "DURABILITY-23" }, 0);
     public static ItemStack TitanBoots = new CustomItem(Material.DIAMOND_BOOTS, "&4&lTitan Boots", new String[] { "PROTECTION_ENVIRONMENTAL-23", "PROTECTION_PROJECTILE-23", "PROTECTION_EXPLOSIONS-23", "THORNS-23", "DURABILITY-23" }, 0);
 
+    public static ItemStack ANCIENT_ALTAR_CRAFTER_BLOCK = FMTabList.getHead("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZWZkMDE2NzY4OTcxNWRmMWFhNTA1NWE2M2VhNmI4YmE2NTZlMmI0YjgxZmNjYWI1M2MzZTIxMDhkODBiODFjIn19fQ==");
+    public static ItemStack AUTOMATED_VANILLA_CRAFTING_CHAMBER = new CustomItem(new MaterialData(Material.WORKBENCH), "&eAutomated Vanilla Crafting Chamber", "", "&6Advanced Machine", "&8\u21E8 &e\u26A1 &710 J/Item");
+    public static ItemStack ANCIENT_ALTAR_CRAFTER = new CustomItem(ANCIENT_ALTAR_CRAFTER_BLOCK, "&6Ancient Altar Crafter", "", "&6Advanced Machine", "&8\u21E8 &e\u26A1 &750 J/Item");
+    public static ItemStack AUTOMATED_ANCIENT_ALTAR_CRAFTER = new CustomItem(new MaterialData(Material.WORKBENCH), "&6Automated Ancient Altar Crafter", "", "&6Advanced Machine", "&8\u21E8 &e\u26A1 &750 J/Item");
+    public static ItemStack THERMAL_GENERATOR;
+    public static ItemStack ELECTRIC_COBBLE_TO_DUST;
+
+    static {
+        try {
+            ELECTRIC_COBBLE_TO_DUST = new CustomItem(CustomSkull.getItem("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYmI1ZDhiOWEzYTk0MjFkY2VkYjE3ZDcxZTNhODg0ZDk1ZWM1MM4YzgzOGNlMTllZDZkOGU5NmM1YjIzZWQ3In19fQ=="), "&3Electric Cobble to Dust", "", "&4End-Game Machine", "&8\u21E8 &7Speed: 2x", "&8\u21E8 &e\u26A1 &730 J/s");
+        } catch (Exception e) {
+            //e.printStackTrace();
+        }
+    }
 
 }

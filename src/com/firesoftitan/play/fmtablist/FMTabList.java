@@ -4,24 +4,36 @@ package com.firesoftitan.play.fmtablist;
 import com.firesoftitan.play.fmtablist.listeners.FMTTabComplete;
 import com.firesoftitan.play.fmtablist.listeners.GPREListener;
 import com.firesoftitan.play.fmtablist.mystuff.CustomConfiguration;
-import com.firesoftitan.play.fmtablist.slimefun.SFItems;
 import com.firesoftitan.play.fmtablist.slimefun.CustomCategories;
+import com.firesoftitan.play.fmtablist.slimefun.SFItems;
+import com.firesoftitan.play.fmtablist.slimefun.machines.AncientAltarCrafter;
+import com.firesoftitan.play.fmtablist.slimefun.machines.AutomatedAncientAltarCrafter;
+import com.firesoftitan.play.fmtablist.slimefun.machines.AutomatedVanillaCraftingChamber;
+import com.firesoftitan.play.fmtablist.slimefun.machines.ElectricCobbletoDust;
 import com.firesoftitan.play.fmtablist.timers.mainBrain;
+import me.mrCookieSlime.CSCoreLibPlugin.Configuration.Config;
 import me.mrCookieSlime.CSCoreLibPlugin.general.Inventory.Item.CustomItem;
 import me.mrCookieSlime.CSCoreLibPlugin.general.World.CustomSkull;
 import me.mrCookieSlime.Slimefun.Lists.RecipeType;
 import me.mrCookieSlime.Slimefun.Lists.SlimefunItems;
 import me.mrCookieSlime.Slimefun.Objects.Research;
 import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.SlimefunItem;
+import me.mrCookieSlime.Slimefun.SlimefunStartup;
+import me.mrCookieSlime.Slimefun.api.BlockStorage;
 import me.mrCookieSlime.Slimefun.api.Slimefun;
+import me.mrCookieSlime.Slimefun.api.energy.ChargableBlock;
+import me.mrCookieSlime.Slimefun.api.energy.EnergyTicker;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.Recipe;
+import org.bukkit.inventory.ShapedRecipe;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.plugin.InvalidDescriptionException;
 import org.bukkit.plugin.InvalidPluginException;
@@ -59,6 +71,7 @@ public class FMTabList extends JavaPlugin {
     public CustomConfiguration voter;
     public File voterFile;
     public static boolean WhosFirst = false;
+    public static Map<String, ItemStack> recipesV = new HashMap<String, ItemStack>();
     // Dependencies Variables
     public void onDisable()
     {
@@ -114,7 +127,75 @@ public class FMTabList extends JavaPlugin {
 ///give freethemice 214 1 0 {display:{Name:"&fTitan Stone"},ench:[{id:34,lvl:10}]}
         registerItems();
 
+        setupVanillaCraft();
+    }
+    public static void setupVanillaCraft()
+    {
+        Bukkit.getScheduler().scheduleSyncDelayedTask(SlimefunStartup.instance, new Runnable() {
+            @Override
+            public void run() {
+                Iterator iterator2 = Bukkit.recipeIterator();
+                while (iterator2.hasNext()) {
+                    Recipe r = (Recipe) iterator2.next();
+                    if (r instanceof ShapedRecipe)
+                    {
+                        ShapedRecipe SR = (ShapedRecipe)r;
+                        String[] shapeS = SR.getShape();
+                        Map<Character, ItemStack> MapCM = SR.getIngredientMap();
+                        ItemStack[] Reci = {null, null, null, null, null, null, null, null, null};
+                        String myName = "";
+                        Character[] key = new Character[9];
+                        int counter = 0;
+                        int[] yH = {0,1,2,3,4,5,6,7,8};//{0,3,6,1,4,7,2,5,8};
+                        String teShape = "";
+                        for (int o = 0; o < shapeS.length;o++ )
+                        {
+                            shapeS[o] = shapeS[o] + "***********";
+                            shapeS[o] = shapeS[o].substring(0, 3);
 
+                            for (int p = 0; p < shapeS[o].length();p++ )
+                            {
+                                key[yH[counter]] = shapeS[o].charAt(p);
+                                counter++;
+                            }
+                            teShape = teShape + shapeS[o]  + "<>";
+                        }
+                        for (int o = shapeS.length; o < 3;o++ )
+                        {
+                            String missed = "***";
+
+                            for (int p = 0; p < missed.length();p++ )
+                            {
+                                key[yH[counter]] = missed.charAt(p);
+                                counter++;
+                            }
+                            teShape = teShape + "XXX"  + "<>";
+                        }
+                        Short Dura = SR.getResult().getDurability();
+
+                        boolean goodRec = false;
+                        for (int o = 0; o < 9;o++ )
+                        {
+
+                            Reci[o] = MapCM.get(key[o]);
+
+                            if (Reci[o] == null || Reci[o].getType() == Material.AIR)
+                            {
+                                myName = myName + "null" + ChatColor.GRAY;
+                            }
+                            else {
+                                goodRec = true;
+                                myName = myName + Reci[o].getType().toString() + ":" + Reci[o].getDurability() + ChatColor.GRAY;
+                            }
+                        }
+                        if (goodRec) {
+                            recipesV.put(myName, r.getResult());
+                        }
+                    }
+                }
+                System.out.println("[Slimefun4]: All vinilla recipes are loaded!");
+            }
+        }, 300);
     }
     public  String getIP()
     {
@@ -163,7 +244,16 @@ public class FMTabList extends JavaPlugin {
         Soulbound.setItemMeta(Soulboundmeta);
         return Soulbound;
     }
-
+    public static ItemStack getHead(String Texture)
+    {
+        try
+        {
+            return CustomSkull.getItem(Texture);
+        }catch (Exception e)
+        {
+            return null;
+        }
+    }
     public void registerItems()
     {
 
@@ -191,13 +281,127 @@ public class FMTabList extends JavaPlugin {
         setupTitanSet();
 
 
+        new ElectricCobbletoDust(CustomCategories.ELECTRICITY, SFItems.ELECTRIC_COBBLE_TO_DUST, "ELECTRIC_COBLE_TO_DUST", RecipeType.ENHANCED_CRAFTING_TABLE,
+                new ItemStack[] {SFItems.LuckyIngot, SFItems.LuckyIngot, SFItems.LuckyIngot, SFItems.LuckyIngot, SlimefunItems.ELECTRIC_DUST_WASHER,  SFItems.LuckyIngot,  SFItems.LuckyIngot,  SFItems.LuckyIngot,  SFItems.LuckyIngot}) {
+
+            @Override
+            public int getEnergyConsumption() {
+                return 15;
+            }
+
+            @Override
+            public int getSpeed() {
+                return 2;
+            }
+        }.registerChargeableBlock(true, 512);
 
 
+        new AutomatedVanillaCraftingChamber(CustomCategories.ELECTRICITY, SFItems.AUTOMATED_VANILLA_CRAFTING_CHAMBER, "AUTOMATED_VANILLA_CRAFTING_CHAMBER", RecipeType.ENHANCED_CRAFTING_TABLE,
+                new ItemStack[] {null, new ItemStack(Material.WORKBENCH), null, SlimefunItems.CARGO_MOTOR, SlimefunItems.COPPER_INGOT, SlimefunItems.CARGO_MOTOR, null, SlimefunItems.ELECTRIC_MOTOR, null}) {
+
+            @Override
+            public int getEnergyConsumption() {
+                return 10;
+            }
+        }.registerChargeableBlock(true, 256);
+
+        new AncientAltarCrafter(CustomCategories.ELECTRICITY, SFItems.ANCIENT_ALTAR_CRAFTER, "ANCIENT_ALTAR_CRAFTER_CHAMBER", RecipeType.ENHANCED_CRAFTING_TABLE,
+                new ItemStack[] {null, SlimefunItems.ANCIENT_PEDESTAL, null, SlimefunItems.CARGO_MOTOR, SlimefunItems.ANCIENT_ALTAR, SlimefunItems.CARGO_MOTOR, SlimefunItems.ANCIENT_PEDESTAL, SlimefunItems.ELECTRIC_MOTOR, SlimefunItems.ANCIENT_PEDESTAL}) {
+
+            @Override
+            public int getEnergyConsumption() {
+                return 50;
+            }
+        }.registerChargeableBlock(true, 256);
+
+        new AutomatedAncientAltarCrafter(CustomCategories.ELECTRICITY, SFItems.AUTOMATED_ANCIENT_ALTAR_CRAFTER, "AUTOMATED_ANCIENT_ALTAR_CRAFTER_CHAMBER", RecipeType.ENHANCED_CRAFTING_TABLE,
+                new ItemStack[] {null, new ItemStack(Material.WORKBENCH), null, SlimefunItems.CARGO_MOTOR, SFItems.ANCIENT_ALTAR_CRAFTER, SlimefunItems.CARGO_MOTOR, null, SlimefunItems.ELECTRIC_MOTOR, null}) {
+
+            @Override
+            public int getEnergyConsumption() {
+                return 50;
+            }
+        }.registerChargeableBlock(true, 256);
+
+        new SlimefunItem(CustomCategories.ELECTRICITY, SFItems.THERMAL_GENERATOR, "THERMAL_GENERATOR", RecipeType.ENHANCED_CRAFTING_TABLE,
+                new ItemStack[] {SlimefunItems.HEATING_COIL, SlimefunItems.SOLAR_GENERATOR_4, SlimefunItems.HEATING_COIL, SlimefunItems.REINFORCED_ALLOY_INGOT, SlimefunItems.LARGE_CAPACITOR, SlimefunItems.REINFORCED_ALLOY_INGOT, SlimefunItems.HEATING_COIL, SlimefunItems.SOLAR_GENERATOR_4, SlimefunItems.HEATING_COIL})
+                .register(true, new EnergyTicker() {
+
+                    @Override
+                    public double generateEnergy(Location l, SlimefunItem item, Config data) {
+                        try {
+                            if (l == null) {
+                                return 0;
+                            }
+                            Location lavaCheck = l.clone().add(0, -1, 0);
+                            Location AirCheck = l.clone().add(0, 1, 0);
+                            boolean Run = true;
+                            boolean explode = false;
+                            if (l.getChunk().isLoaded()) {
+                                try {
+                                    for (int x = -1; x < 2; x++) {
+                                        for (int z = -1; z < 2; z++) {
+                                            if (lavaCheck.clone().add(x, 0, z).getBlock().getType() != Material.STATIONARY_LAVA) {
+                                                Run = false;
+                                            }
+                                            if (AirCheck.clone().add(x, 0, z).getBlock().getType() != Material.AIR) {
+                                                explode = true;
+                                            }
+                                        }
+                                    }
+                                } catch (Exception e) {
+
+                                }
+                            }
+                            if (Run && !explode) {
+                                double past = 256 * (1D - (l.getBlockY() / 100D));
+                                return past;
+                            } else {
+                                if (explode && Run) {
+                                    Bukkit.getScheduler().scheduleSyncDelayedTask(SlimefunStartup.instance, new Runnable() {
+
+                                        @Override
+                                        public void run() {
+                                            AirCheck.getWorld().createExplosion(AirCheck.add(0, 7, 0).clone(), 6);
+                                            BlockStorage.clearBlockInfo(l);
+
+                                            for (int y = 0; y < 100; y++) {
+                                                for (int x = -1; x < 2; x++) {
+                                                    for (int z = -1; z < 2; z++) {
+                                                        Location exp = l.clone().add(x, y, z);
+                                                        if (BlockStorage.hasBlockInfo(exp)) {
+                                                            BlockStorage.clearBlockInfo(exp);
+                                                        }
+                                                        AirCheck.getWorld().getBlockAt(exp).setType(Material.AIR);
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }, 20);
+
+                                }
+                                return 0;
+                            }
+                        }
+                        catch (Exception e)
+                        {
+                            return 0;
+                        }
+                    }
+                    //8192
+                    @Override
+                    public boolean explode(Location l) {
+                        return false;
+                    }
+
+                });
+        ChargableBlock.registerChargableBlock("THERMAL_GENERATOR", 8192, false);
 
 
-
-
-
+        Slimefun.registerResearch(new Research(79001, "Thermal Power Plant", 89), SFItems.THERMAL_GENERATOR);
+        Slimefun.registerResearch(new Research(79002, "Ancient Altar Crafter", 75), SFItems.ANCIENT_ALTAR_CRAFTER);
+        Slimefun.registerResearch(new Research(79003, "Vanilla Auto Crafter", 25), SFItems.AUTOMATED_VANILLA_CRAFTING_CHAMBER);
+        Slimefun.registerResearch(new Research(79004, "Automated Ancient Altar Crafter", 25), SFItems.AUTOMATED_ANCIENT_ALTAR_CRAFTER);
 
 
         Slimefun.registerResearch(new Research(7500, "Titan Stone", 250), new ItemStack[] { SFItems.TitanStone });
@@ -207,13 +411,13 @@ public class FMTabList extends JavaPlugin {
         Slimefun.registerResearch(new Research(7504, "TitanBook All", 150), new ItemStack[] { SFItems.TitanBookAll });
 
         Slimefun.registerResearch(new Research(7505, "Lucky Nugget", 50), new ItemStack[] { SFItems.LuckyNugget,  SFItems.LuckyNuggetB});
-        Slimefun.registerResearch(new Research(7506, "Lucky Axe", 0), new ItemStack[] { SFItems.LuckyAxe });
-        Slimefun.registerResearch(new Research(7507, "Lucky Sword", 0), new ItemStack[] { SFItems.LuckySword });
-        Slimefun.registerResearch(new Research(7508, "Lucky Pickaxe", 0), new ItemStack[] { SFItems.LuckyPickaxe });
-        Slimefun.registerResearch(new Research(7509, "Lucky Helmet", 0), new ItemStack[] { SFItems.LuckyHelmet });
-        Slimefun.registerResearch(new Research(7510, "Lucky Chestplate", 0), new ItemStack[] { SFItems.LuckyChestplate });
-        Slimefun.registerResearch(new Research(7511, "Lucky Leggings", 0), new ItemStack[] { SFItems.LuckyLeggings });
-        Slimefun.registerResearch(new Research(7512, "Lucky Boots", 0), new ItemStack[] { SFItems.LuckyBoots });
+        //Slimefun.registerResearch(new Research(7506, "Lucky Axe", 0), new ItemStack[] { SFItems.LuckyAxe });
+        //Slimefun.registerResearch(new Research(7507, "Lucky Sword", 0), new ItemStack[] { SFItems.LuckySword });
+        //Slimefun.registerResearch(new Research(7508, "Lucky Pickaxe", 0), new ItemStack[] { SFItems.LuckyPickaxe });
+        //Slimefun.registerResearch(new Research(7509, "Lucky Helmet", 0), new ItemStack[] { SFItems.LuckyHelmet });
+        //Slimefun.registerResearch(new Research(7510, "Lucky Chestplate", 0), new ItemStack[] { SFItems.LuckyChestplate });
+        //Slimefun.registerResearch(new Research(7511, "Lucky Leggings", 0), new ItemStack[] { SFItems.LuckyLeggings });
+        //Slimefun.registerResearch(new Research(7512, "Lucky Boots", 0), new ItemStack[] { SFItems.LuckyBoots });
 
         Slimefun.registerResearch(new Research(7513, "Eclipse Nugget", 50), new ItemStack[] { SFItems.EclipseNugget, SFItems.EclipseNuggetB });
         Slimefun.registerResearch(new Research(7514, "Eclipse Axe", 100), new ItemStack[] { SFItems.EclipseAxe });
@@ -236,6 +440,8 @@ public class FMTabList extends JavaPlugin {
         Slimefun.registerResearch(new Research(7529, "Lucky Ingot", 50), new ItemStack[] { SFItems.LuckyIngot });
         Slimefun.registerResearch(new Research(7530, "Eclipse Ingot", 50), new ItemStack[] { SFItems.EclipseIngot });
         Slimefun.registerResearch(new Research(7531, "Titan Ingot", 50), new ItemStack[] { SFItems.TitanIngot });
+
+        Slimefun.registerResearch(new Research(7532, "Electric Cobble to Dust", 50), new ItemStack[] { SFItems.ELECTRIC_COBBLE_TO_DUST });
 
     }
     private void setupTitanSet() {
