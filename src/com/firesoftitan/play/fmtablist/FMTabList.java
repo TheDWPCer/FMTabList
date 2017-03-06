@@ -6,10 +6,7 @@ import com.firesoftitan.play.fmtablist.listeners.GPREListener;
 import com.firesoftitan.play.fmtablist.mystuff.CustomConfiguration;
 import com.firesoftitan.play.fmtablist.slimefun.CustomCategories;
 import com.firesoftitan.play.fmtablist.slimefun.SFItems;
-import com.firesoftitan.play.fmtablist.slimefun.machines.AncientAltarCrafter;
-import com.firesoftitan.play.fmtablist.slimefun.machines.AutomatedAncientAltarCrafter;
-import com.firesoftitan.play.fmtablist.slimefun.machines.AutomatedVanillaCraftingChamber;
-import com.firesoftitan.play.fmtablist.slimefun.machines.ElectricCobbletoDust;
+import com.firesoftitan.play.fmtablist.slimefun.machines.*;
 import com.firesoftitan.play.fmtablist.timers.mainBrain;
 import me.mrCookieSlime.CSCoreLibPlugin.Configuration.Config;
 import me.mrCookieSlime.CSCoreLibPlugin.general.Inventory.Item.CustomItem;
@@ -295,6 +292,19 @@ public class FMTabList extends JavaPlugin {
             }
         }.registerChargeableBlock(true, 512);
 
+        new ElectricCobbletoIngot(CustomCategories.ELECTRICITY, SFItems.ELECTRIC_COBBLE_TO_INGOT, "ELECTRIC_COBLE_TO_INGOT", RecipeType.ENHANCED_CRAFTING_TABLE,
+                new ItemStack[] {SFItems.LuckyIngot, SFItems.LuckyIngot, SFItems.LuckyIngot, SFItems.LuckyIngot, SlimefunItems.ELECTRIC_INGOT_FACTORY,  SFItems.LuckyIngot,  SFItems.LuckyIngot,  SFItems.LuckyIngot,  SFItems.LuckyIngot}) {
+
+            @Override
+            public int getEnergyConsumption() {
+                return 20;
+            }
+
+            @Override
+            public int getSpeed() {
+                return 2;
+            }
+        }.registerChargeableBlock(true, 512);
 
         new AutomatedVanillaCraftingChamber(CustomCategories.ELECTRICITY, SFItems.AUTOMATED_VANILLA_CRAFTING_CHAMBER, "AUTOMATED_VANILLA_CRAFTING_CHAMBER", RecipeType.ENHANCED_CRAFTING_TABLE,
                 new ItemStack[] {null, new ItemStack(Material.WORKBENCH), null, SlimefunItems.CARGO_MOTOR, SlimefunItems.COPPER_INGOT, SlimefunItems.CARGO_MOTOR, null, SlimefunItems.ELECTRIC_MOTOR, null}) {
@@ -441,7 +451,7 @@ public class FMTabList extends JavaPlugin {
         Slimefun.registerResearch(new Research(7530, "Eclipse Ingot", 50), new ItemStack[] { SFItems.EclipseIngot });
         Slimefun.registerResearch(new Research(7531, "Titan Ingot", 50), new ItemStack[] { SFItems.TitanIngot });
 
-        Slimefun.registerResearch(new Research(7532, "Electric Cobble to Dust", 50), new ItemStack[] { SFItems.ELECTRIC_COBBLE_TO_DUST });
+        Slimefun.registerResearch(new Research(7532, "Electric Cobble to", 25), new ItemStack[] { SFItems.ELECTRIC_COBBLE_TO_DUST, SFItems.ELECTRIC_COBBLE_TO_INGOT });
 
     }
     private void setupTitanSet() {
