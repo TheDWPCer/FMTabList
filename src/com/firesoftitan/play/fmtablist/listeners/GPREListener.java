@@ -249,7 +249,7 @@ public class GPREListener implements Listener {
 					}
 				}
 			}
-			if (event.getMessage().startsWith("/yes") && FMTabList.plugin.voter.getProperty(event.getPlayer().getUniqueId().toString()) == null)
+			if (event.getMessage().equalsIgnoreCase("/yes") && FMTabList.plugin.voter.getProperty(event.getPlayer().getUniqueId().toString()) == null)
 			{
 				if (FMTabList.plugin.voter.getProperty("voteyes") == null)
 				{
@@ -266,13 +266,13 @@ public class GPREListener implements Listener {
 			}
 			else
 			{
-				if (event.getMessage().startsWith("/yes"))
+				if (event.getMessage().equalsIgnoreCase("/yes"))
 				{
 					event.getPlayer().sendMessage(ChatColor.GOLD + "[" + ChatColor.DARK_RED + "FMT" + ChatColor.GOLD + "]: " + ChatColor.GREEN + " You can only vote once for this question!");
 					event.setCancelled(true);
 				}
 			}
-			if (event.getMessage().startsWith("/no") && FMTabList.plugin.voter.getProperty(event.getPlayer().getUniqueId().toString()) == null)
+			if (event.getMessage().equalsIgnoreCase("/no") && FMTabList.plugin.voter.getProperty(event.getPlayer().getUniqueId().toString()) == null)
 			{
 				if (FMTabList.plugin.voter.getProperty("voteno") == null)
 				{
@@ -289,7 +289,7 @@ public class GPREListener implements Listener {
 			}
 			else
 			{
-				if (event.getMessage().startsWith("/no"))
+				if (event.getMessage().equalsIgnoreCase("/no"))
 				{
 					event.getPlayer().sendMessage(ChatColor.GOLD + "[" + ChatColor.DARK_RED + "FMT" + ChatColor.GOLD + "]: " + ChatColor.GREEN + " You can only vote once for this question!");
 					event.setCancelled(true);
