@@ -424,6 +424,7 @@ public class FMTabList extends JavaPlugin {
                     }
 
                 });
+
         ChargableBlock.registerChargableBlock("THERMAL_GENERATOR", 8192, false);
 
 

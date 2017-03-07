@@ -1,5 +1,6 @@
 package com.firesoftitan.play.fmtablist.slimefun.machines;
 
+import com.firesoftitan.play.fmtablist.slimefun.SFItems;
 import me.mrCookieSlime.CSCoreLibPlugin.CSCoreLib;
 import me.mrCookieSlime.CSCoreLibPlugin.Configuration.Config;
 import me.mrCookieSlime.CSCoreLibPlugin.general.Inventory.ChestMenu.AdvancedMenuClickHandler;
@@ -14,7 +15,6 @@ import me.mrCookieSlime.Slimefun.Objects.SlimefunBlockHandler;
 import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.SlimefunItem;
 import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.UnregisterReason;
 import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.handlers.BlockTicker;
-import me.mrCookieSlime.Slimefun.TitanHooks;
 import me.mrCookieSlime.Slimefun.api.BlockStorage;
 import me.mrCookieSlime.Slimefun.api.energy.ChargableBlock;
 import me.mrCookieSlime.Slimefun.api.inventory.BlockMenu;
@@ -176,7 +176,7 @@ public abstract class AncientAltarCrafter extends SlimefunItem {
 			});
 		}
 		try {
-			preset.addItem(2, new CustomItem(TitanHooks.ANCIENT_ALTAR_CRAFTER_BLOCK, "&eRecipe", "", "&bPut in the Recipe you want to craft", "&6Ancient Altar Recipes ONLY"),
+			preset.addItem(2, new CustomItem(SFItems.ANCIENT_ALTAR_CRAFTER_BLOCK, "&eRecipe", "", "&bPut in the Recipe you want to craft", "&6Ancient Altar Recipes ONLY"),
 					new MenuClickHandler() {
 
 						@Override
