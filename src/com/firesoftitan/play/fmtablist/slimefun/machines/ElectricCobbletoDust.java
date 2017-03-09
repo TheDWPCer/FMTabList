@@ -92,9 +92,17 @@ public abstract class ElectricCobbletoDust extends AContainer {
                     else if (SlimefunStartup.chance(100, 25)) adding = SlimefunItems.MAGNESIUM_DUST;
                     else if (SlimefunStartup.chance(100, 25)) adding = SlimefunItems.LEAD_DUST;
                     else if (SlimefunStartup.chance(100, 25)) adding = SlimefunItems.SILVER_DUST;
-                    else if (SlimefunStartup.chance(100, 1)) adding = SFItems.EclipseNugget;
-                    else if (SlimefunStartup.chance(100, 10)) adding = SFItems.LuckyNugget;
+                    else if (SlimefunStartup.chance(500, 1)) adding = SFItems.EclipseNugget;
+                    else if (SlimefunStartup.chance(200, 10)) adding = SFItems.LuckyNugget;
 
+                    if (getSpeed() > 9)
+                    {
+                        adding.setAmount(adding.getAmount()  + 2);
+                    }
+                    if (getSpeed() > 19)
+                    {
+                        adding.setAmount(adding.getAmount()  + 2);
+                    }
                     MachineRecipe r = new MachineRecipe(4 / getSpeed(), new ItemStack[0], new ItemStack[] {adding});
                     if (!fits(b, r.getOutput())) return;
                     BlockStorage.getInventory(b).replaceExistingItem(slot, InvUtils.decreaseItem(BlockStorage.getInventory(b).getItemInSlot(slot), 8));

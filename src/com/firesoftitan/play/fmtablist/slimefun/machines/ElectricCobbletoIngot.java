@@ -92,8 +92,18 @@ public abstract class ElectricCobbletoIngot extends AContainer {
                     else if (SlimefunStartup.chance(100, 25)) adding = SlimefunItems.MAGNESIUM_INGOT;
                     else if (SlimefunStartup.chance(100, 25)) adding = SlimefunItems.LEAD_INGOT;
                     else if (SlimefunStartup.chance(100, 25)) adding = SlimefunItems.SILVER_INGOT;
-                    else if (SlimefunStartup.chance(100, 1)) adding = SFItems.EclipseIngot;
-                    else if (SlimefunStartup.chance(100, 10)) adding = SFItems.LuckyIngot;
+                    else if (SlimefunStartup.chance(1000, 1)) adding = SFItems.EclipseIngot;
+                    else if (SlimefunStartup.chance(400, 10)) adding = SFItems.LuckyIngot;
+
+                    if (getSpeed() > 9)
+                    {
+                        adding.setAmount(adding.getAmount()  + 2);
+                    }
+                    if (getSpeed() > 19)
+                    {
+                        adding.setAmount(adding.getAmount()  + 2);
+                    }
+
 
                     MachineRecipe r = new MachineRecipe(4 / getSpeed(), new ItemStack[0], new ItemStack[] {adding});
                     if (!fits(b, r.getOutput())) return;

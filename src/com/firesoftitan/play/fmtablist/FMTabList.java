@@ -325,6 +325,65 @@ public class FMTabList extends JavaPlugin {
             }
         }.registerChargeableBlock(true, 512);
 
+
+        new ElectricCobbletoDust(CustomCategories.ELECTRICITY, SFItems.ELECTRIC_COBBLE_TO_DUST_2, "ELECTRIC_COBLE_TO_DUST_2", RecipeType.ENHANCED_CRAFTING_TABLE,
+                new ItemStack[] {SFItems.LuckyIngot, SFItems.EclipseIngot, SFItems.LuckyIngot, SFItems.EclipseIngot, SlimefunItems.ELECTRIC_DUST_WASHER_2,  SFItems.EclipseIngot,  SFItems.LuckyIngot,  SFItems.EclipseIngot,  SFItems.LuckyIngot}) {
+
+            @Override
+            public int getEnergyConsumption() {
+                return 20;
+            }
+
+            @Override
+            public int getSpeed() {
+                return 10;
+            }
+        }.registerChargeableBlock(true, 512);
+
+        new ElectricCobbletoIngot(CustomCategories.ELECTRICITY, SFItems.ELECTRIC_COBBLE_TO_INGOT_2, "ELECTRIC_COBLE_TO_INGOT_2", RecipeType.ENHANCED_CRAFTING_TABLE,
+                new ItemStack[] {SFItems.LuckyIngot, SFItems.EclipseIngot, SFItems.LuckyIngot, SFItems.EclipseIngot, SlimefunItems.ELECTRIC_INGOT_FACTORY_2,  SFItems.EclipseIngot,  SFItems.LuckyIngot,  SFItems.EclipseIngot,  SFItems.LuckyIngot}) {
+
+            @Override
+            public int getEnergyConsumption() {
+                return 30;
+            }
+
+            @Override
+            public int getSpeed() {
+                return 10;
+            }
+        }.registerChargeableBlock(true, 512);
+
+        new ElectricCobbletoDust(CustomCategories.ELECTRICITY, SFItems.ELECTRIC_COBBLE_TO_DUST_3, "ELECTRIC_COBLE_TO_DUST_3", RecipeType.ENHANCED_CRAFTING_TABLE,
+                new ItemStack[] {SFItems.LuckyIngot, SFItems.TitanIngot, SFItems.LuckyIngot, SFItems.TitanIngot, SlimefunItems.ELECTRIC_DUST_WASHER_3,  SFItems.TitanIngot,  SFItems.LuckyIngot,  SFItems.TitanIngot,  SFItems.LuckyIngot}) {
+
+            @Override
+            public int getEnergyConsumption() {
+                return 20;
+            }
+
+            @Override
+            public int getSpeed() {
+                return 20;
+            }
+        }.registerChargeableBlock(true, 512);
+
+        new ElectricCobbletoIngot(CustomCategories.ELECTRICITY, SFItems.ELECTRIC_COBBLE_TO_INGOT_3, "ELECTRIC_COBLE_TO_INGOT_3", RecipeType.ENHANCED_CRAFTING_TABLE,
+                new ItemStack[] {SFItems.LuckyIngot, SFItems.TitanIngot, SFItems.LuckyIngot, SFItems.TitanIngot, SlimefunItems.ELECTRIC_INGOT_FACTORY_3,  SFItems.TitanIngot,  SFItems.LuckyIngot,  SFItems.TitanIngot,  SFItems.LuckyIngot}) {
+
+            @Override
+            public int getEnergyConsumption() {
+                return 30;
+            }
+
+            @Override
+            public int getSpeed() {
+                return 20;
+            }
+        }.registerChargeableBlock(true, 512);
+
+
+
         new AutomatedVanillaCraftingChamber(CustomCategories.ELECTRICITY, SFItems.AUTOMATED_VANILLA_CRAFTING_CHAMBER, "AUTOMATED_VANILLA_CRAFTING_CHAMBER", RecipeType.ENHANCED_CRAFTING_TABLE,
                 new ItemStack[] {null, new ItemStack(Material.WORKBENCH), null, SlimefunItems.CARGO_MOTOR, SlimefunItems.COPPER_INGOT, SlimefunItems.CARGO_MOTOR, null, SlimefunItems.ELECTRIC_MOTOR, null}) {
 
@@ -471,7 +530,7 @@ public class FMTabList extends JavaPlugin {
         Slimefun.registerResearch(new Research(7530, "Eclipse Ingot", 50), new ItemStack[] { SFItems.EclipseIngot });
         Slimefun.registerResearch(new Research(7531, "Titan Ingot", 50), new ItemStack[] { SFItems.TitanIngot });
 
-        Slimefun.registerResearch(new Research(7532, "Electric Cobble to", 25), new ItemStack[] { SFItems.ELECTRIC_COBBLE_TO_DUST, SFItems.ELECTRIC_COBBLE_TO_INGOT, SFItems.ELECTRIC_LUCKY_BLOCK_FACTORY, SFItems.ELECTRIC_LUCKY_BLOCK_GRINDER });
+        Slimefun.registerResearch(new Research(7532, "Electric Cobble to", 25), new ItemStack[] { SFItems.ELECTRIC_COBBLE_TO_DUST_3, SFItems.ELECTRIC_COBBLE_TO_INGOT_3,SFItems.ELECTRIC_COBBLE_TO_DUST_2, SFItems.ELECTRIC_COBBLE_TO_INGOT_2, SFItems.ELECTRIC_COBBLE_TO_DUST, SFItems.ELECTRIC_COBBLE_TO_INGOT, SFItems.ELECTRIC_LUCKY_BLOCK_FACTORY, SFItems.ELECTRIC_LUCKY_BLOCK_GRINDER });
 
     }
     private void setupTitanSet() {

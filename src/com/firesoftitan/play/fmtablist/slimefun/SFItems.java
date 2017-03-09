@@ -65,6 +65,10 @@ public class SFItems {
     public static ItemStack THERMAL_GENERATOR;
     public static ItemStack ELECTRIC_COBBLE_TO_DUST;
     public static ItemStack ELECTRIC_COBBLE_TO_INGOT;
+    public static ItemStack ELECTRIC_COBBLE_TO_DUST_2;
+    public static ItemStack ELECTRIC_COBBLE_TO_INGOT_2;
+    public static ItemStack ELECTRIC_COBBLE_TO_DUST_3;
+    public static ItemStack ELECTRIC_COBBLE_TO_INGOT_3;
     public static ItemStack ELECTRIC_LUCKY_BLOCK_FACTORY;
     public static ItemStack ELECTRIC_LUCKY_BLOCK_GRINDER;
 
@@ -77,6 +81,11 @@ public class SFItems {
             PandorasBox = new CustomItem(CustomSkull.getItem("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvODZjN2RkZTUxMjg3MWJkNjA3Yjc3ZTY2MzVhZDM5ZjQ0ZjJkNWI0NzI5ZTYwMjczZjFiMTRmYmE5YTg2YSJ9fX0="), "&5Pandora\'s Box", new String[]{"&7Luck: &c&oERROR"});
             ELECTRIC_COBBLE_TO_DUST = new CustomItem(CustomSkull.getItem("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYTU0OTQ3ZGU3ZjUyNTk4MjU1ZDZhZmVlOWQ3N2JlZmFkOWI0ZjI0YzBjNDY2M2QyOGJjZGY4YTY0NTdmMzQifX19"), "&3Electric Cobble to Dust", "", "&4End-Game Machine", "&6Has a small changes of Lucky and Eclispse Nuggets", "&8\u21E8 &7Speed: 2x", "&8\u21E8 &e\u26A1 &720 J/s");
             ELECTRIC_COBBLE_TO_INGOT = new CustomItem(CustomSkull.getItem("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMzRkYmNiN2UxZmJlY2VhOWE3MzUwNDM2Y2JiZWEyYjQ5NmY3NGMyOTcyMDRmMWJiOWFjYzM4NzhkNTQyY2NiIn19fQ=="), "&3Electric Cobble to Ingot", "", "&4End-Game Machine", "&6Has a small changes of Lucky and Eclispse Ingots", "&8\u21E8 &7Speed: 2x", "&8\u21E8 &e\u26A1 &730 J/s");
+            ELECTRIC_COBBLE_TO_DUST_2 = new CustomItem(CustomSkull.getItem("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYTU0OTQ3ZGU3ZjUyNTk4MjU1ZDZhZmVlOWQ3N2JlZmFkOWI0ZjI0YzBjNDY2M2QyOGJjZGY4YTY0NTdmMzQifX19"), "&3Electric Cobble to Dust &7(&eII&7)", "", "&4End-Game Machine", "&6Has a small changes of Lucky and Eclispse Nuggets", "Gives 3 dust instead of 1", "&8\u21E8 &7Speed: 10x", "&8\u21E8 &e\u26A1 &720 J/s");
+            ELECTRIC_COBBLE_TO_INGOT_2 = new CustomItem(CustomSkull.getItem("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMzRkYmNiN2UxZmJlY2VhOWE3MzUwNDM2Y2JiZWEyYjQ5NmY3NGMyOTcyMDRmMWJiOWFjYzM4NzhkNTQyY2NiIn19fQ=="), "&3Electric Cobble to Ingot &7(&eII&7)", "", "&4End-Game Machine", "&6Has a small changes of Lucky and Eclispse Ingots", "Gives 3 Ingots instead of 1", "&8\u21E8 &7Speed: 10x", "&8\u21E8 &e\u26A1 &730 J/s");
+            ELECTRIC_COBBLE_TO_DUST_3 = new CustomItem(CustomSkull.getItem("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYTU0OTQ3ZGU3ZjUyNTk4MjU1ZDZhZmVlOWQ3N2JlZmFkOWI0ZjI0YzBjNDY2M2QyOGJjZGY4YTY0NTdmMzQifX19"), "&3Electric Cobble to Dust &7(&eIII&7)", "", "&4End-Game Machine", "&6Has a small changes of Lucky and Eclispse Nuggets", "Gives 5 dust instead of 1", "&8\u21E8 &7Speed: 20x", "&8\u21E8 &e\u26A1 &720 J/s");
+            ELECTRIC_COBBLE_TO_INGOT_3 = new CustomItem(CustomSkull.getItem("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMzRkYmNiN2UxZmJlY2VhOWE3MzUwNDM2Y2JiZWEyYjQ5NmY3NGMyOTcyMDRmMWJiOWFjYzM4NzhkNTQyY2NiIn19fQ=="), "&3Electric Cobble to Ingot &7(&eIII&7)", "", "&4End-Game Machine", "&6Has a small changes of Lucky and Eclispse Ingots", "Gives 5 Ingots instead of 1", "&8\u21E8 &7Speed: 20x", "&8\u21E8 &e\u26A1 &730 J/s");
+
             ELECTRIC_LUCKY_BLOCK_FACTORY = new CustomItem(CustomSkull.getItem("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYmI1ZDhiOWEzYTk0MjFkY2VkYjE3ZDcxZTNhODg0ZDk1ZWM1MDM4YzgzOGNlMTllZDZkOGU5NmM1YjIzZWQ3In19fQ=="), "&3Electric Lucky Block Factory", "", "&4End-Game Machine", "&6Will take any Gold Ingot", "&8\u21E8 &7Speed: 1x", "&8\u21E8 &e\u26A1 &725 J/s");
             ELECTRIC_LUCKY_BLOCK_GRINDER = new CustomItem(CustomSkull.getItem("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMWFkNTQyNGQ5OTAzOTUzODQzNTI2YTdjNDE2ODY2ZTdkNzk1MDFjODhjZTdjZGFiZWVlNTI4NGVhMzlmIn19fQ=="), "&3Electric Lucky Block Grinder", "", "&4End-Game Machine", "&6Will almost anything Lucky or Not", "&8\u21E8 &7Speed: 1x", "&8\u21E8 &e\u26A1 &730 J/s");
         } catch (Exception e) {
