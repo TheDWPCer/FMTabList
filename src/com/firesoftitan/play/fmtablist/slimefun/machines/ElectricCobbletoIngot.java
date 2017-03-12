@@ -94,14 +94,15 @@ public abstract class ElectricCobbletoIngot extends AContainer {
                     else if (SlimefunStartup.chance(100, 25)) adding = SlimefunItems.SILVER_INGOT;
                     else if (SlimefunStartup.chance(1000, 1)) adding = SFItems.EclipseIngot;
                     else if (SlimefunStartup.chance(400, 10)) adding = SFItems.LuckyIngot;
-
+                    adding = adding.clone();
+                    adding.setAmount(1);
                     if (getSpeed() > 9)
                     {
-                        adding.setAmount(adding.getAmount()  + 2);
+                        adding.setAmount(3);
                     }
                     if (getSpeed() > 19)
                     {
-                        adding.setAmount(adding.getAmount()  + 2);
+                        adding.setAmount(5);
                     }
 
 

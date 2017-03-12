@@ -22,10 +22,10 @@ import org.bukkit.material.MaterialData;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class ElectricCobbletoDust extends AContainer {
-
+public abstract class ElectricCobbletoDust extends AContainer {;
     public ElectricCobbletoDust(Category category, ItemStack item, String name, RecipeType recipeType, ItemStack[] recipe) {
         super(category, item, name, recipeType, recipe);
+
     }
 
     @Override
@@ -94,14 +94,15 @@ public abstract class ElectricCobbletoDust extends AContainer {
                     else if (SlimefunStartup.chance(100, 25)) adding = SlimefunItems.SILVER_DUST;
                     else if (SlimefunStartup.chance(500, 1)) adding = SFItems.EclipseNugget;
                     else if (SlimefunStartup.chance(200, 10)) adding = SFItems.LuckyNugget;
-
+                    adding = adding.clone();
+                    adding.setAmount(1);
                     if (getSpeed() > 9)
                     {
-                        adding.setAmount(adding.getAmount()  + 2);
+                        adding.setAmount(3);
                     }
                     if (getSpeed() > 19)
                     {
-                        adding.setAmount(adding.getAmount()  + 2);
+                        adding.setAmount(5);
                     }
                     MachineRecipe r = new MachineRecipe(4 / getSpeed(), new ItemStack[0], new ItemStack[] {adding});
                     if (!fits(b, r.getOutput())) return;
@@ -118,5 +119,5 @@ public abstract class ElectricCobbletoDust extends AContainer {
     public String getMachineIdentifier() {
         return "ELECTRIC_COBBLE_TO_DUST";
     }
-
+    
 }
