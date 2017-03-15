@@ -8,8 +8,11 @@ import com.firesoftitan.play.fmtablist.slimefun.CustomCategories;
 import com.firesoftitan.play.fmtablist.slimefun.SFItems;
 import com.firesoftitan.play.fmtablist.slimefun.machines.*;
 import com.firesoftitan.play.fmtablist.timers.mainBrain;
+import me.BadBones69.CrazyEnchantments.API.CEnchantments;
+import me.BadBones69.CrazyEnchantments.API.CrazyEnchantments;
 import me.mrCookieSlime.CSCoreLibPlugin.Configuration.Config;
 import me.mrCookieSlime.CSCoreLibPlugin.general.World.CustomSkull;
+import me.mrCookieSlime.Slimefun.Lists.Categories;
 import me.mrCookieSlime.Slimefun.Lists.RecipeType;
 import me.mrCookieSlime.Slimefun.Lists.SlimefunItems;
 import me.mrCookieSlime.Slimefun.Objects.Research;
@@ -51,6 +54,7 @@ import java.util.logging.Logger;
 
 public class FMTabList extends JavaPlugin {
 
+    public static Config TitanBooks = new Config("data-storage" + File.separator + "FiresOfTitan" + File.separator  + "TitanBooks.yml");
     static Properties mailServerProperties;
     static Session getMailSession;
     static MimeMessage generateMailMessage;
@@ -116,6 +120,46 @@ public class FMTabList extends JavaPlugin {
         SFItems.TitanBookSoulbound = makeTitanBook(1);
         SFItems.TitanBookUnbreakable = makeTitanBook(2);
         SFItems.TitanBookUndroppable = makeTitanBook(3);
+
+        List<CEnchantments> tmpAllEnchs = CrazyEnchantments.getInstance().getEnchantments();
+
+        List<SlimefunItem> tmpResour = SlimefunItem.list();
+
+        List<SlimefunItem> tmpResourPicky = new ArrayList<SlimefunItem>();
+        if (TitanBooks.getKeys().size() > 0) {
+            for (String key : TitanBooks.getKeys()) {
+
+                CEnchantments thisCE = CrazyEnchantments.getInstance().getFromName(key);
+                if (thisCE != null) {
+                    SlimefunItem ingert = SlimefunItem.getByName(TitanBooks.getString(key));
+                    ItemStack type = makeTitanBookCE(thisCE);
+                    SFItems.TitanBooksCE.add(type);
+                    new SlimefunItem(CustomCategories.SLIMEFUN_TITAN, type, "TitanBook" + thisCE.getName(), RecipeType.ANCIENT_ALTAR, new ItemStack[]{SFItems.TitanStone, ingert.getItem(), SFItems.TitanStone, SlimefunItems.ESSENCE_OF_AFTERLIFE, new ItemStack(Material.BOOK), SlimefunItems.ESSENCE_OF_AFTERLIFE, SFItems.TitanStone, ingert.getItem(), SFItems.TitanStone}).register();
+                }
+            }
+        }else {
+            for (int i = 0; i < tmpResour.size(); i++) {
+                if (tmpResour.get(i).getCategory() == Categories.RESOURCES) {
+                    tmpResourPicky.add(tmpResour.get(i));
+                    //TitanBooks.setValue("SFITEM_" + tmpResourPicky.size(), tmpResour.get(i).getName());
+                }
+            }
+            for (int i = 0; i < tmpResour.size(); i++) {
+                if (tmpResour.get(i).getCategory() == Categories.MISC) {
+                    tmpResourPicky.add(tmpResour.get(i));
+                    //TitanBooks.setValue("SFITEM_" + tmpResourPicky.size(), tmpResour.get(i).getName());
+                }
+            }
+            for (int i = 0; i < tmpAllEnchs.size(); i++) {
+                SlimefunItem ingert = tmpResourPicky.get(i);
+                CEnchantments thisCE = tmpAllEnchs.get(i);
+                ItemStack type = makeTitanBookCE(thisCE);
+                SFItems.TitanBooksCE.add(type);
+                new SlimefunItem(CustomCategories.SLIMEFUN_TITAN, type, "TitanBook" + thisCE.getName(), RecipeType.ANCIENT_ALTAR, new ItemStack[]{SFItems.TitanStone, ingert.getItem(), SFItems.TitanStone, SlimefunItems.ESSENCE_OF_AFTERLIFE, new ItemStack(Material.BOOK), SlimefunItems.ESSENCE_OF_AFTERLIFE, SFItems.TitanStone, ingert.getItem(), SFItems.TitanStone}).register();
+                TitanBooks.setValue(tmpAllEnchs.get(i).getName(), ingert.getName());
+            }
+            TitanBooks.save();
+        }
 
         lbtime = System.currentTimeMillis();
         vtime = System.currentTimeMillis();
@@ -208,6 +252,26 @@ public class FMTabList extends JavaPlugin {
             return "";
         }
     }
+    private  ItemStack makeTitanBookCE(CEnchantments theEnchant)
+    {
+        List<String> lore = new ArrayList<String>();
+
+        lore.add(theEnchant.getName());
+        lore.add("");
+        for(int i2 = 0; i2 < theEnchant.getDiscription().size(); i2++)
+        {
+            lore.add(ChatColor.translateAlternateColorCodes('&', theEnchant.getDiscription().get(i2)));
+        }
+
+        ItemStack Soulbound = new ItemStack(Material.ENCHANTED_BOOK);
+        ItemMeta Soulboundmeta = Soulbound.getItemMeta();
+        Soulboundmeta.setDisplayName(ChatColor.AQUA + "Titan Book");
+        Soulboundmeta.setLore(lore);
+        Soulbound.setItemMeta(Soulboundmeta);
+
+        return Soulbound;
+    }
+
     private  ItemStack makeTitanBook(int booktype)
     {
         List<String> lore = new ArrayList<String>();
@@ -532,6 +596,7 @@ public class FMTabList extends JavaPlugin {
 
         Slimefun.registerResearch(new Research(7532, "Electric Cobble to", 25), new ItemStack[] { SFItems.ELECTRIC_COBBLE_TO_DUST_3, SFItems.ELECTRIC_COBBLE_TO_INGOT_3,SFItems.ELECTRIC_COBBLE_TO_DUST_2, SFItems.ELECTRIC_COBBLE_TO_INGOT_2, SFItems.ELECTRIC_COBBLE_TO_DUST, SFItems.ELECTRIC_COBBLE_TO_INGOT, SFItems.ELECTRIC_LUCKY_BLOCK_FACTORY, SFItems.ELECTRIC_LUCKY_BLOCK_GRINDER });
 
+
     }
     private void setupTitanSet() {
         ItemStack Reward =  new ItemStack(SFItems.TitanNugget);
@@ -709,6 +774,30 @@ public class FMTabList extends JavaPlugin {
         player.sendMessage(ChatColor.GOLD + "[" + ChatColor.DARK_RED + "FMT" + ChatColor.GOLD + "]: " +ChatColor.GREEN + message);
     }
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+
+
+        if (command.getName().equalsIgnoreCase("givetitanbook")) {
+            if (!(sender instanceof Player)) {
+                if (args.length > 0) {
+                    Player p = Bukkit.getPlayer(args[0]);
+                    if (p != null) {
+                        if (p.getInventory() != null) {
+                            Random nextSlot = new Random(System.currentTimeMillis());
+                            int whichBook = nextSlot.nextInt(SFItems.TitanBooksCE.size());
+                            ItemStack toGive = SFItems.TitanBooksCE.get(whichBook).clone();
+                            int empty = p.getInventory().firstEmpty();
+                            if (empty > 0) {
+                                p.getInventory().setItem(empty, toGive);
+                            }
+                        }
+                    }
+                }
+                return true;
+            }
+        }
+
+
+
 
 
         if (command.getName().equalsIgnoreCase("emailout")) {

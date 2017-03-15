@@ -7,10 +7,14 @@ import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.material.MaterialData;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by Daniel on 12/28/2016.
  */
 public class SFItems {
+    public static List<ItemStack> TitanBooksCE = new ArrayList<ItemStack>();
     public static ItemStack TitanStone;
     public static ItemStack TitanBookSoulbound;
     public static ItemStack TitanBookUnbreakable;

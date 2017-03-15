@@ -16,7 +16,7 @@ import org.bukkit.inventory.ItemStack;
  */
 public class CustomCategories
 {
-    public static final Category SLIMEFUN_TITAN = new Category(new CustomItem(new ItemStack(Material.NETHER_WART_BLOCK), "&5Magic", new String[] { "", "&a >Click to open" }), 5);
+    public static final Category SLIMEFUN_TITAN = new Category(new CustomItem(new ItemStack(Material.ENCHANTED_BOOK), "&5Titan Books", new String[] { "", "&a >Click to open" }), 5);
     public static final Category SLIMEFUN_RESOURCES = new Category(new CustomItem(new ItemStack(Material.GOLD_INGOT), "&5Resources", new String[] { "", "&a >Click to open" }), 5);
     public static final SeasonCategory SLIMEFUN_BLANK = new SeasonCategory(18, 0, new MenuItem(Material.NETHER_STAR, "TRASH", 0, ChatColor.translateAlternateColorCodes('&', "&chelp &aSanta")));
     public static final Category SLIMEFUN_LUCKY = new Category(new CustomItem(new ItemStack(Material.ENCHANTMENT_TABLE), "&5Lucky Gear", new String[] { "", "&a >Click to open" }), 5);

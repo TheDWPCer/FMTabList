@@ -8,11 +8,11 @@ import com.comphenix.protocol.events.PacketContainer;
 import com.comphenix.protocol.wrappers.WrappedChatComponent;
 import com.earth2me.essentials.Essentials;
 import com.earth2me.essentials.User;
+import com.firesoftitan.play.fmtablist.FMTabList;
+import com.firesoftitan.play.fmtablist.mystuff.teleportpro;
 import com.onarandombox.MultiverseCore.MultiverseCore;
 import com.onarandombox.MultiverseCore.api.MultiverseWorld;
 import me.BadBones69.envoy.api.Envoy;
-import com.firesoftitan.play.fmtablist.FMTabList;
-import com.firesoftitan.play.fmtablist.mystuff.teleportpro;
 import me.ryanhamshire.GriefPrevention.GriefPrevention;
 import net.minecraft.server.v1_11_R1.NBTTagCompound;
 import org.bukkit.*;
@@ -206,7 +206,12 @@ public class GPREListener implements Listener {
 
 
 		if (event.getPlayer() != null) {
-			if (event.getPlayer().getGameMode() != null) {
+
+
+
+
+
+			if (event.getPlayer().getGameMode() != null && event.getPlayer().hasPermission("FMTabList.email")) {
 				if (event.getPlayer().getGameMode() == GameMode.CREATIVE) {
 					if (event.getMessage().startsWith("/guide") || event.getMessage().startsWith("/sf guide")) {
 						event.getPlayer().sendMessage(ChatColor.GOLD + "[" + ChatColor.LIGHT_PURPLE + "Server" + ChatColor.GOLD + "] " + ChatColor.RED + "Can't use Slimefun in creative!");
@@ -407,6 +412,7 @@ public class GPREListener implements Listener {
 
 		User user = ess.getUser(p);
 		String prefix = ess.getPermissionsHandler().getPrefix(p);
+		String suffix = ess.getPermissionsHandler().getSuffix(p);
 		prefix = replaceColors(prefix);
 		prefix = prefix.replace("[", "");
 		prefix = prefix.replace("]", "");
@@ -436,10 +442,14 @@ public class GPREListener implements Listener {
 		} else {
 			tabName = tabName + ChatColor.WHITE + p.getName();
 		}
-
-		if (nick != null && !nick.equals("")) {
-			tabName = tabName + ChatColor.GOLD + "(" + ChatColor.WHITE + user.getNickname() + ChatColor.GOLD + ")";
+		if (!suffix.equals(""))
+		{
+			tabName = tabName + ChatColor.translateAlternateColorCodes('&', suffix);
 		}
+		if (nick != null && !nick.equals("")) {
+			tabName = tabName + ChatColor.GOLD + " AKA:" + ChatColor.WHITE + user.getNickname();
+		}
+
 /*
 		if (Ticks < 10) {
 			Help = ChatColor.GOLD + "<" + ChatColor.AQUA + "Party" + ChatColor.GOLD + ">";

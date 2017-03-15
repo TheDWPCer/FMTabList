@@ -21,6 +21,10 @@ commands:
    setvote:
       description: Used to do setvote
       usage: /<command>
+   givetitanbook:
+      description: Used to do givetitanbook
+      usage: /<command>
+
 permissions:
   FMTabList.lbt:
     description: Gives access to lbt commands

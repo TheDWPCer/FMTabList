@@ -119,5 +119,5 @@ public abstract class ElectricCobbletoDust extends AContainer {;
     public String getMachineIdentifier() {
         return "ELECTRIC_COBBLE_TO_DUST";
     }
-    
+
 }

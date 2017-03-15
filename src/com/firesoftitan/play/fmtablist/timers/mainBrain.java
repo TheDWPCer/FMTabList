@@ -77,6 +77,30 @@ public class mainBrain implements Runnable {
         for (Player p : Bukkit.getOnlinePlayers()) {;
             if (!p.hasPermission("fly.fly"))
             {
+                /*
+                if (p.getInventory() != null)
+                {
+                    if (p.getInventory().getBoots() != null)
+                    {
+                        if (p.getInventory().getBoots().getItemMeta() != null)
+                        {
+                            if (p.getInventory().getBoots().getItemMeta().getLore() != null)
+                            {
+                                List<String> lore = p.getInventory().getBoots().getItemMeta().getLore();
+                                for(int i = 0;  i < lore.size();i++)
+                                {
+                                    if (lore.get(i).startsWith(ChatColor.AQUA + "Titan.Wings"))
+                                    {
+                                        PlayerData playerData = GriefPrevention.instance.dataStore.getPlayerData(p.getUniqueId());
+                                        playerData.
+                                        Claim claim = GriefPrevention.instance.dataStore.getClaimAt(p.getLocation(), false, playerData.lastClaim);
+
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }*/
                 p.setFlying(false);
                 p.setAllowFlight(false);
             }
@@ -219,6 +243,7 @@ public class mainBrain implements Runnable {
                     }
 
                 }
+                /*
                 if (p.getInventory().getItemInMainHand().getItemMeta().hasEnchants()) {
                     if (p.getInventory().getItemInMainHand().getItemMeta().getEnchants() != null) {
                         Map<Enchantment, Integer> tmpEnch = p.getInventory().getItemInMainHand().getItemMeta().getEnchants();
@@ -229,7 +254,7 @@ public class mainBrain implements Runnable {
                             }
                         }
                     }
-                }
+                }*/
 
             }
 
